@@ -1,0 +1,22 @@
+.toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.button {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background: #f0f0f0;
+}
+
+.button.active {
+  background: #e0e0e0;
+}
