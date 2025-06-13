@@ -1,6 +1,6 @@
 # WYSIWYG Editor
 
-A simple and customizable rich text editor built with React and TypeScript.
+A simple and customizable simple text editor built with React and TypeScript.
 
 ## Features
 
