@@ -1,46 +1,145 @@
-# Getting Started with Create React App
+# WYSIWYG Editor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple and customizable rich text editor built with React and TypeScript.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Simple text formatting (Bold, Italic, Underline)
+- Controlled & Uncontrolled component patterns
+- Customizable toolbar
+- Easy to integrate
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+git clone <https://github.com/YousefMaher179/ososs-tech-test.git>
+npm install
+npm start
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Quick Start
 
-### `npm test`
+### Basic Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```jsx
+import { WysiwygEditor } from './components/WysiwygEditor';
+import { EditorState } from 'draft-js';
 
-### `npm run build`
+function App() {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  return (
+    <WysiwygEditor
+      editorState={editorState}
+      onChange={setEditorState}
+      placeholder="Start typing..."
+    />
+  );
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Usage Examples
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Controlled Mode
+The editor requires you to manage the state (controlled component):
 
-### `npm run eject`
+```jsx
+const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<WysiwygEditor
+  editorState={editorState}
+  onChange={setEditorState}
+/>
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Uncontrolled Mode
+Simple implementation where editor manages its own state internally:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```jsx
+function SimpleEditor() {
+  return (
+    <WysiwygEditor
+      placeholder="Start typing..."
+    />
+  );
+}
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Custom Toolbar
+Replace the default toolbar with your own:
 
-## Learn More
+```jsx
+const CustomToolbar = () => (
+  <div>
+    <button onClick={() => toggleBold()}>Bold</button>
+    <button onClick={() => toggleItalic()}>Italic</button>
+  </div>
+);
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<WysiwygEditor
+  editorState={editorState}
+  onChange={setEditorState}
+  toolbar={<CustomToolbar />}
+/>
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure
+
+```
+ososs-task/
+├── public/
+│   ├── favicon.ico
+│   └── index.html
+├── src/
+│   ├── __tests__/
+│   │   └── components/
+│   │       └── Toolbar/
+│   │           └── Toolbar.test.tsx
+│   ├── components/
+│   │   ├── Toolbar/
+│   │   │   ├── index.ts
+│   │   │   ├── Toolbar.module.css
+│   │   │   └── Toolbar.tsx
+│   │   └── WysiwygEditor/
+│   │       ├── index.ts
+│   │       ├── WysiwygEditor.module.css
+│   │       └── WysiwygEditor.tsx
+│   ├── demo/
+│   │   ├── DemoPage.module.css
+│   │   ├── DemoPage.tsx
+│   │   └── index.ts
+│   ├── types/
+│   │   ├── editor.ts
+│   │   └── index.ts
+│   ├── utils/
+│   │   ├── api.ts
+│   │   └── index.ts
+│   ├── App.module.css
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── setupTests.ts
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── README.md
+└── tsconfig.json
+```
+
+## Scripts
+
+```bash
+# Development
+npm start
+
+# Testing
+npm test
+
+# Build
+npm run build
+```
+
+## Dependencies
+
+- React
+- Draft.js
+- TypeScript
